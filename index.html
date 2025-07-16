@@ -202,6 +202,12 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        .opening-slide .powered-by-logo img {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
+        }
+
         .opening-slide .brand-name {
             color: var(--connectgo-green);
             font-weight: 600;
@@ -648,15 +654,6 @@
             <!-- Slide 1: Opening Animation -->
             <section class="opening-slide">
                 <div class="content-wrapper">
-                <div class="logo-container">
-                    <div class="logo">
-                        <div class="logo-icon">
-                            <div class="logo-circle"></div>
-                            <div class="logo-circle"></div>
-                        </div>
-                        <span>ConnectGo</span>
-                    </div>
-                </div>
 
                 <h1 class="main-title">A Learning Infrastructure for Social Monitoring & Learning</h1>
                 <p class="subtitle">Powered by ConnectGo</p>
@@ -678,8 +675,9 @@
                 </div>
                 </div>
 
-                <div class="powered-by">
-                    Powered by<span class="brand-name">ConnectGo</span>
+                <!-- Powered by ConnectGo logo - bottom left -->
+                <div class="powered-by-logo">
+                    <img src="./images/Powered by ConnectGo_white.png" alt="Powered by ConnectGo" />
                 </div>
 
                 <div class="nav-hint">
