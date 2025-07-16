@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectGo Learning Infrastructure Presentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap');
+
+        .reveal {
+            font-family: 'Sora', sans-serif;
+        }
+
+        /* Custom theme colors */
+        :root {
+            --connectgo-green: #4a9d5f;
+            --connectgo-dark: #1a1a2e;
+            --connectgo-medium: #16213e;
+            --connectgo-light: #0f3460;
+            --connectgo-accent: #6f42c1;
+        }
+
+        /* Global background gradient */
+        .reveal .slides {
+            background: linear-gradient(135deg, var(--connectgo-dark) 0%, var(--connectgo-medium) 50%, var(--connectgo-light) 100%);
+        }
+
+        .reveal .slides section {
+            text-align: center;
+            padding: 20px;
+            height: auto !important;
+            min-height: 100vh;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Opening slide styles - Enhanced */
+        .opening-slide {
+            background: linear-gradient(135deg, var(--connectgo-dark) 0%, var(--connectgo-medium) 50%, var(--connectgo-light) 100%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background particles - Enhanced */
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        /* Geometric background elements */
+        .opening-slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(74, 157, 95, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(111, 66, 193, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(74, 157, 95, 0.05) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+        }
+
+        .opening-slide .logo-container {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            opacity: 0;
+            animation: fadeInLogo 1s ease-in-out 0.5s forwards;
+        }
+
+        .opening-slide .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .opening-slide .logo-icon {
+            width: 30px;
+            height: 20px;
+            position: relative;
+        }
+
+        .opening-slide .logo-circle {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--connectgo-green);
+            border-radius: 50%;
+            position: absolute;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .opening-slide .logo-circle:first-child {
+            left: 0;
+            top: 2px;
+        }
+
+        .opening-slide .logo-circle:last-child {
+            right: 0;
+            top: 2px;
+            animation-delay: 0.5s;
+        }
+
+        .opening-slide .main-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInTitle 1.5s ease-out 1s forwards;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .opening-slide .subtitle {
+            font-size: 1.3rem;
+            color: var(--connectgo-green);
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInSubtitle 1.2s ease-out 1.8s forwards;
+            font-style: italic;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .opening-slide .content-section {
+            max-width: 900px;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .opening-slide .content-section.intro {
+            animation: slideInContent 1s ease-out 3s forwards;
+        }
+
+        .opening-slide .content-section.description {
+            animation: slideInContent 1s ease-out 3.8s forwards;
+        }
+
+        .opening-slide .content-section.purpose {
+            animation: slideInContent 1s ease-out 4.6s forwards;
+        }
+
+        .opening-slide .content-section.brands {
+            animation: slideInContent 1s ease-out 5.4s forwards;
+        }
+
+        .opening-slide .content-section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .opening-slide .highlight {
+            color: var(--connectgo-green);
+            font-weight: 500;
+            text-shadow: 0 0 20px rgba(74, 157, 95, 0.5);
+        }
+
+        .opening-slide .powered-by {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeInBranding 1s ease-in-out 6s forwards;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .opening-slide .brand-name {
+            color: var(--connectgo-green);
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .opening-slide .nav-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            animation: fadeInNavHint 1s ease-in-out 7s forwards;
+            opacity: 0;
+        }
+
+        /* Standard slide styles - Enhanced */
+        .standard-slide {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            color: #333;
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .standard-slide .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .standard-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(74, 157, 95, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(111, 66, 193, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .standard-slide h2 {
+            color: var(--connectgo-dark);
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--connectgo-dark), var(--connectgo-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .standard-slide .slide-subtitle {
+            color: var(--connectgo-green);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: center;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .standard-slide .content-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            color: #555;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        /* Enhanced screenshot container */
+        .screenshot-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+            perspective: 1000px;
+        }
+
+        /* Special styling for mobile screenshot containers */
+        /* Mobile screenshots specific styling */
+        .mobile-screenshots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .mobile-screenshots .screenshot.mobile {
+            max-width: 200px;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border: 3px dashed var(--connectgo-green);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--connectgo-green);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(74, 157, 95, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .screenshot-placeholder:hover::before {
+            left: 100%;
+        }
+
+        .screenshot-placeholder:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+            border-color: var(--connectgo-accent);
+            color: var(--connectgo-accent);
+        }
+
+        .screenshot-placeholder.large {
+            width: 500px;
+            height: 280px;
+        }
+
+        .screenshot-placeholder.medium {
+            width: 300px;
+            height: 200px;
+        }
+
+        .screenshot-placeholder.small {
+            width: 200px;
+            height: 140px;
+        }
+
+        .screenshot-placeholder.mobile {
+            width: 140px;
+            height: 250px;
+        }
+
+        /* Enhanced branding elements */
+        .slide-branding {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.6);
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .slide-branding .mini-logo {
+            width: 20px;
+            height: 14px;
+            position: relative;
+        }
+
+        .slide-branding .mini-circle {
+            width: 10px;
+            height: 10px;
+            border: 1.5px solid var(--connectgo-green);
+            border-radius: 50%;
+            position: absolute;
+            animation: miniPulse 3s ease-in-out infinite;
+        }
+
+        .slide-branding .mini-circle:first-child {
+            left: 0;
+            top: 2px;
+        }
+
+        .slide-branding .mini-circle:last-child {
+            right: 0;
+            top: 2px;
+            animation-delay: 1s;
+        }
+
+        @keyframes miniPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+
+        /* Multi-slide sections */
+        .multi-slide .slide-counter {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: var(--connectgo-green);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Final slide enhancements */
+        .final-slide {
+            background: linear-gradient(135deg, var(--connectgo-dark) 0%, var(--connectgo-medium) 50%, var(--connectgo-light) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px 20px;
+        }
+
+        .final-slide .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .final-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(74, 157, 95, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(111, 66, 193, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .final-slide h2 {
+            color: white;
+            background: none;
+            -webkit-text-fill-color: white;
+        }
+
+        .final-slide .slide-subtitle {
+            color: var(--connectgo-green);
+        }
+
+        .final-slide .content-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--connectgo-green);
+            display: block;
+            text-shadow: 0 0 20px rgba(74, 157, 95, 0.5);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 8px;
+        }
+
+        /* Animations */
+        @keyframes fadeInLogo {
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInTitle {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInSubtitle {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInContent {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInBranding {
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInNavHint {
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .opening-slide .main-title {
+                font-size: 2rem;
+            }
+            
+            .opening-slide .subtitle {
+                font-size: 1rem;
+            }
+            
+            .opening-slide .content-section p {
+                font-size: 0.9rem;
+            }
+            
+            .standard-slide h2 {
+                font-size: 1.8rem;
+            }
+            
+            .standard-slide .slide-subtitle {
+                font-size: 1rem;
+            }
+            
+            .standard-slide .content-description {
+                font-size: 0.9rem;
+            }
+            
+            .screenshot-placeholder.large,
+            .screenshot.large {
+                width: 90%;
+                height: 200px;
+                max-height: 200px;
+            }
+            
+            .screenshot-placeholder.medium,
+            .screenshot.medium {
+                width: 90%;
+                height: 150px;
+                max-height: 150px;
+            }
+            
+            .screenshot-placeholder.small,
+            .screenshot.small {
+                width: 45%;
+                height: 120px;
+                max-height: 120px;
+            }
+
+            .screenshot-placeholder.mobile,
+            .screenshot.mobile {
+                max-width: 180px;
+                max-height: 300px;
+                object-fit: contain;
+                margin: 0 10px;
+            }
+
+            .stats-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .stat-item {
+                padding: 15px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .reveal .slides section {
+                padding: 15px;
+            }
+
+            .standard-slide {
+                padding: 20px 15px;
+            }
+        }
+
+        /* Custom reveal.js overrides */
+        .reveal .controls {
+            color: var(--connectgo-green);
+        }
+
+        .reveal .progress {
+            color: var(--connectgo-green);
+        }
+
+        .reveal .slide-number {
+            color: var(--connectgo-green);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Opening Animation -->
+            <section class="opening-slide">
+                <div class="content-wrapper">
+                <div class="logo-container">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <div class="logo-circle"></div>
+                            <div class="logo-circle"></div>
+                        </div>
+                        <span>ConnectGo</span>
+                    </div>
+                </div>
+
+                <h1 class="main-title">A Learning Infrastructure for Social Monitoring & Learning</h1>
+                <p class="subtitle">Powered by ConnectGo</p>
+
+                <div class="content-section intro">
+                    <p>In a world where social impact matters, projects need more than just data. They need ways to <span class="highlight">learn, adapt, and grow, together</span>.</p>
+                </div>
+
+                <div class="content-section description">
+                    <p>This is a learning infrastructure designed for <span class="highlight">social monitoring and collective learning</span>.</p>
+                </div>
+
+                <div class="content-section purpose">
+                    <p>It's built to help communities, developers, and partners <span class="highlight">surface, evidence, and act on the outcomes that matter most</span> - together.</p>
+                </div>
+
+                <div class="content-section brands">
+                    <p>Whether you know it as <span class="highlight">REFLECT</span>, <span class="highlight">YouthImpact</span>, or your own brand, it's powered by ConnectGo.</p>
+                </div>
+                </div>
+
+                <div class="powered-by">
+                    Powered by<span class="brand-name">ConnectGo</span>
+                </div>
+
+                <div class="nav-hint">
+                    Use arrow keys or swipe to navigate →
+                </div>
+            </section>
+
+            <!-- Slide 2: Dashboard Overview - Image 1 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">1/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Dashboard Overview</h2>
+                <p class="slide-subtitle">Get a comprehensive view of all your projects and organizations.</p>
+                <p class="content-description">Monitor progress, track key metrics, and manage multiple projects from a single, intuitive dashboard.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot1.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 3: Dashboard Overview - Image 2 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">2/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Dashboard Overview</h2>
+                <p class="slide-subtitle">Quick access to organizations, projects, and sites at a glance.</p>
+                <p class="content-description">Real-time progress tracking, risk monitoring, and review management in one unified interface.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot2.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 4: Dashboard Overview - Image 3 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">3/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Dashboard Overview</h2>
+                <p class="slide-subtitle">Advanced filtering and search capabilities.</p>
+                <p class="content-description">Find exactly what you need with powerful search tools and customizable views.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot3.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 5: Project & Site Setup -->
+            <section class="standard-slide">
+                <div class="content-wrapper">
+                <h2>Project & Site Setup</h2>
+                <p class="slide-subtitle">Set up new projects and sites in moments. Just add names, locations, and details.</p>
+                <p class="content-description">Create new projects quickly with our intuitive setup wizard. Add project details, locations, contact information, and configure settings with just a few clicks.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot4.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 6: Stakeholder Mapping - Image 5 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">1/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Stakeholder Mapping</h2>
+                <p class="slide-subtitle">Map your key stakeholders and their relationships.</p>
+                <p class="content-description">Identify and categorize stakeholders, understand their connections to your project, and document their interests and concerns.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot5.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 7: Stakeholder Mapping - Image 6 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">2/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Stakeholder Mapping</h2>
+                <p class="slide-subtitle">Capture who's involved, what matters to them, and how they're impacted.</p>
+                <p class="content-description">Document stakeholder benefits, potential risks, and their level of influence on project outcomes.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot6.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 8: Stakeholder Mapping - Image 7 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">3/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Stakeholder Mapping</h2>
+                <p class="slide-subtitle">Visual stakeholder relationship mapping and analysis.</p>
+                <p class="content-description">See the big picture with interactive stakeholder maps that show relationships, influence levels, and engagement strategies.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot7.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 9: Theory of Change - Stage 1 - Image 8 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">1/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Theory of Change – Stage 1</h2>
+                <p class="slide-subtitle">Define the actions and conditions needed for change to happen.</p>
+                <p class="content-description">Map out what your team or organisation must do before outcomes are possible. Stage 1 focuses on defining actions and enabling conditions.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot8.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 10: Theory of Change - Stage 1 - Image 9 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">2/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Theory of Change – Stage 1</h2>
+                <p class="slide-subtitle">Build the foundation for meaningful change.</p>
+                <p class="content-description">Create enabling conditions that create the foundation for meaningful change across stakeholder groups.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot9.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 11: Theory of Change - Stage 1 - Image 10 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">3/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Theory of Change – Stage 1</h2>
+                <p class="slide-subtitle">Track progress on actions and conditions.</p>
+                <p class="content-description">Monitor implementation progress and ensure all foundational elements are in place before moving to outcomes.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot10.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 12: Theory of Change - Stage 2 - Image 11 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">1/4</div>
+                <div class="content-wrapper">
+                
+                <h2>Theory of Change – Stage 2</h2>
+                <p class="slide-subtitle">Identify the outcomes that matter for each stakeholder group.</p>
+                <p class="content-description">Connect your actions to the real-world changes you want to see. Stage 2 focuses on defining social impacts and risks for each stakeholder group.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot11.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 13: Theory of Change - Stage 2 - Image 12 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">2/4</div>
+                <div class="content-wrapper">
+                
+                <h2>Theory of Change – Stage 2</h2>
+                <p class="slide-subtitle">Create a clear pathway from actions to outcomes.</p>
+                <p class="content-description">Map the logical connections between your Stage 1 actions and the desired outcomes for each stakeholder group.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot12.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 14: Theory of Change - Stage 2 - Image 13 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">3/4</div>
+                <div class="content-wrapper">
+                
+                <h2>Theory of Change – Stage 2</h2>
+                <p class="slide-subtitle">Define social impacts and risks for stakeholders.</p>
+                <p class="content-description">Identify potential positive and negative outcomes, ensuring comprehensive impact assessment across all stakeholder groups.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot13.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 15: Theory of Change - Stage 2 - Image 14 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">4/4</div>
+                <div class="content-wrapper">
+                
+                <h2>Theory of Change – Stage 2</h2>
+                <p class="slide-subtitle">Complete outcome mapping and validation.</p>
+                <p class="content-description">Review and validate your complete theory of change, ensuring all stakeholder outcomes are clearly defined and measurable.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot14.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 16: Link to Frameworks - Image 15 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">1/5</div>
+                <div class="content-wrapper">
+                
+                <h2>Link to Frameworks</h2>
+                <p class="slide-subtitle">Connect your work to established frameworks like SDGs and sector indicators.</p>
+                <p class="content-description">Easily link actions and outcomes to sector frameworks, themes, and indicators. No spreadsheets required.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot15.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 17: Link to Frameworks - Image 16 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">2/5</div>
+                <div class="content-wrapper">
+                
+                <h2>Link to Frameworks</h2>
+                <p class="slide-subtitle">Automatically link themes, subthemes, and indicators.</p>
+                <p class="content-description">Our intelligent system suggests relevant framework connections based on your actions and outcomes.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot16.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 18: Link to Frameworks - Image 17 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">3/5</div>
+                <div class="content-wrapper">
+                
+                <h2>Link to Frameworks</h2>
+                <p class="slide-subtitle">SDG alignment and impact measurement.</p>
+                <p class="content-description">Track your contribution to the Sustainable Development Goals with clear, measurable indicators.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot17.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 19: Link to Frameworks - Image 18 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">4/5</div>
+                <div class="content-wrapper">
+                
+                <h2>Link to Frameworks</h2>
+                <p class="slide-subtitle">Resilience dimensions and custom frameworks.</p>
+                <p class="content-description">Connect to resilience frameworks and create custom indicator sets for specialized sector requirements.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot18.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 20: Link to Frameworks - Image 19 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">5/5</div>
+                <div class="content-wrapper">
+                
+                <h2>Link to Frameworks</h2>
+                <p class="slide-subtitle">Complete framework integration and reporting.</p>
+                <p class="content-description">Generate comprehensive reports showing how your project contributes to multiple frameworks simultaneously.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot19.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 21: Build Custom Surveys - Image 20 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">1/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Build Custom Surveys</h2>
+                <p class="slide-subtitle">Build custom surveys, automatically linked to your theory of change.</p>
+                <p class="content-description">Choose the right questions for each stakeholder, site, and theme, with just a few clicks. Our intelligent survey builder automatically selects relevant questions.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot20.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 22: Build Custom Surveys - Image 21 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">2/3</div>
+                <div class="content-wrapper">
+                
+                <h2>Build Custom Surveys</h2>
+                <p class="slide-subtitle">Intelligent question selection based on your setup.</p>
+                <p class="content-description">The system automatically suggests questions based on your stakeholder groups, outcomes, and framework connections.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot21.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 23: Build Custom Surveys - Image 22 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">3/3</div>
+                <div class="content-wrapper">
+                <h2>Build Custom Surveys</h2>
+                <p class="slide-subtitle">Preview and deploy your surveys instantly.</p>
+                <p class="content-description">Review your complete survey, test the user experience, and deploy to your field teams with one click.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot22.PNG" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 24: Data Collection (Mobile) - Image 23 -->
+            <section class="standard-slide multi-slide">
+                <div class="slide-counter">1/2</div>
+                <div class="content-wrapper">
+                <h2>Data Collection (Mobile)</h2>
+                <p class="slide-subtitle">Collect data in the field on any device, even offline.</p>
+                <p class="content-description">Empower local teams and partners to gather high-quality, real-time insights. Our mobile-optimized surveys work seamlessly across devices.</p>
+                
+                <div class="mobile-screenshots">
+                    <img src="./images/shot23.jpg" alt="Mobile Survey Interface" class="screenshot mobile">
+                    <img src="./images/shot24.jpg" alt="Mobile Survey Response" class="screenshot mobile">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Slide 26: Visualise Results -->
+            <section class="standard-slide">
+                <div class="content-wrapper">
+                <h2>Visualise Results</h2>
+                <p class="slide-subtitle">Turn data into insights instantly.</p>
+                <p class="content-description">Visualize your results, track progress, and share learning with your team and partners. Our powerful visualization tools help you understand trends, compare responses, and communicate impact effectively.</p>
+                
+                <div class="screenshot-container">
+                    <img src="./images/shot25.png" alt="Main Dashboard View" class="screenshot large">
+                </div>
+                </div>
+
+                <div class="slide-branding">
+                    <div class="mini-logo">
+                        <div class="mini-circle"></div>
+                        <div class="mini-circle"></div>
+                    </div>
+                    <span>ConnectGo</span>
+                </div>
+            </section>
+
+            <!-- Final slide with call to action -->
+            <section class="final-slide">
+                <div class="content-wrapper">
+                <h2>Ready to Transform Your Impact?</h2>
+                <p class="slide-subtitle">Start building your learning infrastructure today</p>
+                <p class="content-description">Whether you know it as REFLECT, YouthImpact, or your own brand - it's all powered by ConnectGo. Join communities, developers, and partners who are already using our platform to surface, evidence, and act on the outcomes that matter most.</p>
+                </div>
+                <div style="margin-top: 60px;">
+                   <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 40px;">
+                       <div style="width: 40px; height: 28px; position: relative;">
+                           <div style="width: 24px; height: 24px; border: 3px solid var(--connectgo-green); border-radius: 50%; position: absolute; left: 0; top: 2px; animation: pulse 2s ease-in-out infinite;"></div>
+                           <div style="width: 24px; height: 24px; border: 3px solid var(--connectgo-green); border-radius: 50%; position: absolute; right: 0; top: 2px; animation: pulse 2s ease-in-out infinite 0.5s;"></div>
+                       </div>
+                       <span style="font-size: 1.5rem; font-weight: 600; color: var(--connectgo-green);">ConnectGo</span>
+                   </div>
+                   
+                   <p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 20px;">Amplifying transformative impact</p>
+                   
+                   
+               </div>
+                
+
+               <div class="slide-branding">
+                   <div class="mini-logo">
+                       <div class="mini-circle"></div>
+                       <div class="mini-circle"></div>
+                   </div>
+                   <span>ConnectGo</span>
+               </div>
+           </section>
+       </div>
+   </div>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+   <script>
+       // Enhanced floating particles for opening slide
+       function createParticle() {
+           const particle = document.createElement('div');
+           particle.className = 'particle';
+           particle.style.left = Math.random() * 100 + 'vw';
+           particle.style.animationDelay = Math.random() * 15 + 's';
+           particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+           
+           const openingSlide = document.querySelector('.opening-slide');
+           if (openingSlide) {
+               openingSlide.appendChild(particle);
+               
+               setTimeout(() => {
+                   if (particle.parentNode) {
+                       particle.parentNode.removeChild(particle);
+                   }
+               }, 25000);
+           }
+       }
+
+       // Initialize Reveal.js
+       Reveal.initialize({
+           hash: true,
+           controls: true,
+           progress: true,
+           center: true,
+           transition: 'slide',
+           transitionSpeed: 'default',
+           backgroundTransition: 'fade',
+           keyboard: true,
+           touch: true,
+           loop: false,
+           rtl: false,
+           navigationMode: 'default',
+           view: 'scroll',
+           fragments: true,
+           fragmentInURL: false,
+           embedded: false,
+           help: true,
+           pause: true,
+           showNotes: false,
+           autoPlayMedia: null,
+           preloadIframes: null,
+           autoAnimate: true,
+           autoAnimateMatcher: null,
+           autoAnimateEasing: 'ease',
+           autoAnimateDuration: 1.0,
+           autoAnimateUnmatched: true,
+           autoSlide: 0,
+           autoSlideStoppable: true,
+           autoSlideMethod: null,
+           defaultTiming: null,
+           mouseWheel: false,
+           hideInactiveCursor: true,
+           hideCursorTime: 5000,
+           previewLinks: false,
+           postMessage: true,
+           postMessageEvents: false,
+           focusBodyOnPageVisibilityChange: true,
+           plugins: []
+       });
+
+       // Enhanced particle system for opening slide
+       Reveal.on('slidechanged', event => {
+           if (event.indexh === 0) {
+               // Generate initial particles for opening slide
+               for (let i = 0; i < 30; i++) {
+                   setTimeout(() => createParticle(), i * 100);
+               }
+               
+               // Continue generating particles while on opening slide
+               const particleInterval = setInterval(() => {
+                   if (Reveal.getIndices().h === 0) {
+                       createParticle();
+                   } else {
+                       clearInterval(particleInterval);
+                   }
+               }, 200);
+           }
+       });
+
+       // Initial particles for opening slide when page loads
+       setTimeout(() => {
+           for (let i = 0; i < 30; i++) {
+               setTimeout(() => createParticle(), i * 100);
+           }
+           
+           // Continue generating particles
+           const initialInterval = setInterval(() => {
+               if (Reveal.getIndices().h === 0) {
+                   createParticle();
+               } else {
+                   clearInterval(initialInterval);
+               }
+           }, 200);
+       }, 1000);
+
+       // Enhanced keyboard shortcuts
+       document.addEventListener('keydown', function(event) {
+           switch(event.key) {
+               case 'Home':
+                   Reveal.slide(0);
+                   break;
+               case 'End':
+                   Reveal.slide(Reveal.getTotalSlides() - 1);
+                   break;
+               case 'r':
+               case 'R':
+                   // Restart presentation
+                   if (event.ctrlKey || event.metaKey) {
+                       Reveal.slide(0);
+                   }
+                   break;
+           }
+       });
+
+       // Add smooth transitions and enhanced visual effects
+       Reveal.on('ready', event => {
+           // Add any additional initialization here
+           console.log('ConnectGo Presentation Ready');
+       });
+   </script>
+</body>
+</html>
